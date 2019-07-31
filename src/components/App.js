@@ -6,6 +6,29 @@ import SearchAppointments from './SearchAppointments';
 import ListAppointments from './ListAppointments';
 
 class App extends Component {
+
+  //
+  constructor() {
+    super();
+    // creates an element thats available inside components
+    this.state = {
+      myAppointments: []
+    }
+  }
+
+  componentDidMount() {
+    fetch('./data.json')
+      .then(response => response.json())
+      .then(results => {
+        const apts = results.map(item => {
+          return item;
+      })
+      this.setState({
+        myAppointments: apts
+      });
+    });
+  }
+
   render () {
     return (
       <main className="page bg-white" id="petratings">
