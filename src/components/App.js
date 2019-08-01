@@ -12,7 +12,8 @@ class App extends Component {
     super();
     // creates an element thats available inside components
     this.state = {
-      myAppointments: []
+      myAppointments: [],
+      lastIndex: 0
     }
   }
 
@@ -21,6 +22,8 @@ class App extends Component {
       .then(response => response.json())
       .then(results => {
         const apts = results.map(item => {
+          item.aptId = this.state.lastIndex;
+          this.setState({ lastIndex: this.state.lastIndex + 1 });
           return item;
       })
       this.setState({
