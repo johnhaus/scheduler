@@ -15,9 +15,17 @@ class App extends Component {
     // creates an element thats available inside components
     this.state = {
       myAppointments: [],
+      formDisplay: false,
       lastIndex: 0
     };
     this.deleteAppointment = this.deleteAppointment.bind(this);
+    this.toggleForm = this.toggleForm.bind(this);
+  }
+
+  toggleForm() {
+    this.setState({
+      formDisplay: !this.state.formDisplay
+    });
   }
 
   deleteAppointment(apt) {
@@ -51,7 +59,10 @@ class App extends Component {
           <div className="row">
             <div className="col-md-12 bg-white">
               <div className="container">
-                <AddAppointments />
+                <AddAppointments
+                  formDisplay={this.state.formDisplay}
+                  toggleForm={this.toggleForm}
+                />
                 <SearchAppointments />
                 <ListAppointments appointments={this.state.myAppointments}
                   deleteAppointment={this.deleteAppointment} />
