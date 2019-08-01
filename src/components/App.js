@@ -16,19 +16,24 @@ class App extends Component {
       formDisplay: false,
       orderBy: 'petName',
       orderDir: 'asc',
-      queryText: 'cat',
+      queryText: '',
       lastIndex: 0
     };
     this.deleteAppointment = this.deleteAppointment.bind(this);
     this.toggleForm = this.toggleForm.bind(this);
     this.addAppointment = this.addAppointment.bind(this);
     this.changeOrder = this.changeOrder.bind(this);
+    this.searchApts = this.searchApts.bind(this);
   }
 
   toggleForm() {
     this.setState({
       formDisplay: !this.state.formDisplay
     });
+  }
+
+  searchApts(query) {
+    this.setState({queryText: query});
   }
 
   changeOrder(order, dir) {
@@ -122,6 +127,7 @@ class App extends Component {
                   orderBy={this.state.orderBy}
                   orderDir={this.state.orderDir}
                   changeOrder={this.changeOrder}
+                  searchApts={this.searchApts}
                 />
                 <ListAppointments
                   appointments={filteredApts}
